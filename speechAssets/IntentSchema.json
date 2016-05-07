@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "HelloWorldIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "CokeColaIntent"
+    }
+  ]
+}
