@@ -1,13 +1,22 @@
 {
   "intents": [
     {
-      "intent": "HelloWorldIntent"
+      "intent": "SayWordIntent",
+      "slots": [
+        {
+          "name":"Word",
+          "type":"AMAZON.LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.StopIntent"
     },
     {
       "intent": "AMAZON.HelpIntent"
     },
     {
-      "intent": "CokeColaIntent"
+      "intent": "AMAZON.CancelIntent"
     }
   ]
 }

@@ -29,41 +29,41 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
 var AlexaSkill = require('./AlexaSkill');
 
 /**
- * HelloWorld is a child of AlexaSkill.
+ * DrSpeech is a child of AlexaSkill.
  * To read more about inheritance in JavaScript, see the link below.
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript#Inheritance
  */
-var HelloWorld = function () {
+var DrSpeech = function () {
     AlexaSkill.call(this, APP_ID);
 };
 
 // Extend AlexaSkill
-HelloWorld.prototype = Object.create(AlexaSkill.prototype);
-HelloWorld.prototype.constructor = HelloWorld;
+DrSpeech.prototype = Object.create(AlexaSkill.prototype);
+DrSpeech.prototype.constructor = DrSpeech;
 
-HelloWorld.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-    console.log("HelloWorld onSessionStarted requestId: " + sessionStartedRequest.requestId
+DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+    console.log("DrSpeech onSessionStarted requestId: " + sessionStartedRequest.requestId
         + ", sessionId: " + session.sessionId);
     // any initialization logic goes here
 };
 
-HelloWorld.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    console.log("HelloWorld onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
+DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+    console.log("DrSpeech onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
     var speechOutput = "Welcome to the Alexa Skills Kit, you can say hello";
     var repromptText = "You can say hello";
     response.ask(speechOutput, repromptText);
 };
 
-HelloWorld.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-    console.log("HelloWorld onSessionEnded requestId: " + sessionEndedRequest.requestId
+DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+    console.log("DrSpeech onSessionEnded requestId: " + sessionEndedRequest.requestId
         + ", sessionId: " + session.sessionId);
     // any cleanup logic goes here
 };
 
-HelloWorld.prototype.intentHandlers = {
+DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
-    "HelloWorldIntent": function (intent, session, response) {
+    "DrSpeechIntent": function (intent, session, response) {
         response.tellWithCard("Mandy is awesome!");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
@@ -76,7 +76,7 @@ HelloWorld.prototype.intentHandlers = {
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
-    // Create an instance of the HelloWorld skill.
-    var helloWorld = new HelloWorld();
+    // Create an instance of the DrSpeech skill.
+    var helloWorld = new DrSpeech();
     helloWorld.execute(event, context);
 };
