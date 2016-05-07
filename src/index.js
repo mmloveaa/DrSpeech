@@ -50,7 +50,7 @@ DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequ
 
 DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("DrSpeech onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "Welcome to Doctor Speech. Let's Begin Your Lesson. How do you say fork?";
+    var speechOutput = "Welcome to Doctor Speech. Let's Begin Your Lesson. How do you say fork? You can answer by saying its ...";
     var repromptText = "How do you say fork?";
     response.ask(speechOutput, repromptText);
 };
@@ -64,7 +64,7 @@ DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest,
 DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
     "SayWordIntent": function (intent, session, response) {
-        response.tellWithCard("Mandy is awesome!");
+        response.tellWithCard("Mandy is awesome!","Mandy","Mandy is awesome");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("Try again and listen carefully", "You can do this!");
