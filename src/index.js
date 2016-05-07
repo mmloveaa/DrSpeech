@@ -50,8 +50,8 @@ DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequ
 
 DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
     console.log("DrSpeech onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "Welcome to the Alexa Skills Kit, you can say hello";
-    var repromptText = "You can say hello";
+    var speechOutput = "Welcome to Doctor Speech. Let's Begin Your Lesson. How do you say fork?";
+    var repromptText = "How do you say fork?";
     response.ask(speechOutput, repromptText);
 };
 
@@ -63,14 +63,11 @@ DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest,
 
 DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
-    "DrSpeechIntent": function (intent, session, response) {
+    "SayWordIntent": function (intent, session, response) {
         response.tellWithCard("Mandy is awesome!");
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("You can say hello to me!", "You can say hello to me!");
-    },
-    "CokeColaIntent": function (intent, session, response) {
-        response.tellWithCard("Do you have coke?");
+        response.ask("Try again and listen carefully", "You can do this!");
     }
 };
 

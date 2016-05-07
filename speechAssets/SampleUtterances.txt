@@ -1,2 +1,2 @@
-SayWordIntent Its {fork | SayWordIntent}
-SayWordIntent {fork | SayWordIntent}
+SayWordIntent Its {fork | Word}
+SayWordIntent {fork | Word}
