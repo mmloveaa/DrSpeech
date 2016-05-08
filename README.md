@@ -22,5 +22,5 @@ To run this example skill you need to do two things. The first is to deploy the 
 
 
 ## Examples
-    User: "Alexa, tell Greeter to say hello"
-    Alexa: "Hello World!"
+    User: "Alexa, Doctor Speech"
+    Alexa: "Welcome to Doctor Speech. Let's Begin Your Lesson."
