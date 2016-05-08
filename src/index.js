@@ -27,6 +27,7 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  * The AlexaSkill prototype and helper functions
  */
 var AlexaSkill = require('./AlexaSkill');
+var Speech = require('./lib/speech');
 
 /**
  * DrSpeech is a child of AlexaSkill.
@@ -49,10 +50,13 @@ DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequ
 };
 
 DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    console.log("DrSpeech onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-    var speechOutput = "Welcome to Doctor Speech. Let's Begin Your Lesson. How do you say fork? You can answer by saying its ...";
-    var repromptText = "How do you say fork?";
-    response.ask(speechOutput, repromptText);
+    var speech = new Speech();
+    speech.say("Welcome to Doctor Speech. Let's Begin Your Lesson.");
+    speech.say("When you give an answer, start with saying its.");
+    speech.pause("1s");
+    speech.say("How do you say fork?");
+
+    response.ask(speech.toObject(), "How do you say fork?");
 };
 
 DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
