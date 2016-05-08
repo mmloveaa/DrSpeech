@@ -1,5 +1,8 @@
 ## About
-Dr Speech is an Alexa skill that is designed to help people who speak English as a second language to improve the accuracy of their pronunciation. Alexa will ask the user to say a random word and it will vaildate whether it is the correct word or not. To use the skill, the user first needs to say "Doctor Speech" which is the trigger word. They are then prompted to select one of the three categories which are verb, noun and adjective. After the category is selected, Alexa will give you a random word to pronounce.
+Dr Speech is an Alexa skill that is designed to help people who speak English as a second language to improve the accuracy of their pronunciation.
+
+How does it work?
+Alexa will prompt the user to repeat a word and she will vaildate if it is spoken correctly. If not, Alexa will break down the word into each syllable so the user can learn how to pronounce the word more accurately. To use the skill, the user first needs to say "Doctor Speech" which is the trigger word. They are then prompted to select one of the three categories which are verb, noun and adjective. After the category is selected, Alexa will give you a random word to pronounce.
 
 ## Setup
 To run this example skill you need to do two things. The first is to deploy the example code in lambda, and the second is to configure the Alexa skill to use Lambda.
