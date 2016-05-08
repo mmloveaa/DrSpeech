@@ -83,6 +83,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.spell(word);
         } else {
             speech.say("That was not correct. I heard ");
+            speech.pause("1s");
             speech.say(word);
             speech.pause('1s');
             speech.say("which is spelled as");
@@ -93,7 +94,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("800ms");
             var syllables = syl(WORD);
             syllables.syllables.forEach(function (part, index) {
-                speech.pause("100ms");
+                speech.pause("300mss");
                 speech.say(part);
             });
         }
