@@ -84,7 +84,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("1s");
             speech.say("The correct way to pronounce it is");
             speech.pause("800ms");
-            speech.audio("http://www.howmanysyllables.com/pronounce/happy.mp3");
+            speech.audio("https://ssl.gstatic.com/dictionary/static/sounds/de/0/fork.mp3");
         }
 
         response.tell(speech.toObject());
