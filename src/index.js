@@ -68,8 +68,15 @@ DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest,
 DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
     "SayWordIntent": function (intent, session, response) {
+        var speech = new Speech();
         var word = intent.slots.Word.value;
-        response.tell("You just said " + word);
+        speech.say("You just said,");
+        speech.say(word);
+        speech.pause("1s");
+        speech.say("It spells as ");
+        speech.spell(word);
+        
+        response.tell(speech.toObject());
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("Try again and listen carefully", "You can do this!");
