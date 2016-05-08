@@ -81,18 +81,19 @@ DrSpeech.prototype.intentHandlers = {
 
         var speech = new Speech();
         var givenCategory = intent.slots.Category.value;
+        var theRandomWord = vocabulary.getRandomWord(givenCategory)
 
         if (givenCategory === "verb" || givenCategory ==="noun" || givenCategory ==="adjective") {
             speech.say("Great");
             speech.pause("1s");
             speech.say("You want to practice on" + givenCategory);
             speech.pause("1s");
-            speech.say("How do you say " + intent.slots.Word.value + "?");  
+            speech.say("How do you say " + theRandomWord + "?");  
         } else {
             speech.say("Please choose the category again. You can choose noun, verb or adjective");
         }
 
-        var reprompt = "How do you say " + intent.slots.Word.value + "?";
+        var reprompt = "How do you say " + theRandomWord + "?";
 
         response.ask(speech.toObject(), reprompt);
     },
