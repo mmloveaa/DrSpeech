@@ -85,6 +85,15 @@ Speech.prototype.spell = function (word) {
     return this;
 };
 
+Speech.prototype.spellSlowly = function (word, delay) {
+    this._present(word, "The word provided to Speech#spell(..) was null or undefined.");
+    for (var i = 0; i < word.length; i++) {
+        this._elements.push("<say-as interpret-as='spell-out'>" + word.charAt(i) + "</say-as>");
+        this.pause(delay);
+    }
+    return this;
+};
+
 /**
  * This constructs an object that the AlexaSkill.js accepts to send to the user.
  * @returns {{type: string, speech}}
