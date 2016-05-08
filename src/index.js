@@ -72,7 +72,7 @@ DrSpeech.prototype.intentHandlers = {
         var word = intent.slots.Word.value;
         if (word == "fork") {
             speech.say("You said it correctly.");
-            speech.say(word);
+            speech.audio("https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + word.toLowerCase() + ".mp3");
             speech.pause("1s");
             speech.say("It spells as ");
             speech.spell(word);
