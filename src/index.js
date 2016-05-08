@@ -22,12 +22,14 @@
  * App ID for the skill
  */
 var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
+var WORD = 'banana';
 
 /**
  * The AlexaSkill prototype and helper functions
  */
 var AlexaSkill = require('./AlexaSkill');
 var Speech = require('./lib/speech');
+var syl = require('./lib/syllables');
 
 /**
  * DrSpeech is a child of AlexaSkill.
@@ -54,9 +56,10 @@ DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, re
     speech.say("Welcome to Doctor Speech. Let's Begin Your Lesson.");
     speech.say("When you give an answer, start with saying its.");
     speech.pause("1s");
-    speech.say("How do you say fork?");
+    speech.say("How do you say ");
+    speech.say(WORD);
 
-    response.ask(speech.toObject(), "How do you say fork?");
+    response.ask(speech.toObject(), "How do you say " + WORD);
 };
 
 DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
@@ -70,7 +73,7 @@ DrSpeech.prototype.intentHandlers = {
     "SayWordIntent": function (intent, session, response) {
         var speech = new Speech();
         var word = intent.slots.Word.value;
-        if (word == "fork") {
+        if (word == WORD) {
             speech.say("You said it correctly.");
             speech.say(word);
             speech.pause("1s");
@@ -81,6 +84,14 @@ DrSpeech.prototype.intentHandlers = {
             speech.say(word);
             speech.say(" which is spelled");
             speech.spell(word);
+            speech.pause("1s");
+            speech.say("The correct way to pronounce it is");
+            speech.pause("800ms");
+            var syllables = syl(WORD);
+            syllables.syllables.forEach(function (part, index) {
+                speech.pause("500ms");
+                speech.say(part);
+            });
         }
 
         response.tell(speech.toObject());
