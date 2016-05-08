@@ -16,7 +16,7 @@ Vocabulary.prototype.getRandomWord = function (categoryOfWord) {
 };
 
 Vocabulary.prototype.random = function (length) {
-    return Math.floor(Math.random() * length) + 1;
+    return Math.floor(Math.random() * length);
 };
 
 module.exports = Vocabulary;

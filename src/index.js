@@ -81,12 +81,14 @@ DrSpeech.prototype.intentHandlers = {
 
         var speech = new Speech();
         var givenCategory = intent.slots.Category.value;
-        var theRandomWord = vocabulary.getRandomWord(givenCategory)
+        var theRandomWord = vocabulary.getRandomWord(givenCategory);
+        session.attributes.saveWord = theRandomWord;
+        // need to save session attribute saveWord here because this is where theRandomWord was generated
 
         if (givenCategory === "verb" || givenCategory ==="noun" || givenCategory ==="adjective") {
             speech.say("Great");
             speech.pause("1s");
-            speech.say("You want to practice on" + givenCategory);
+            speech.say("You want to practice on " + givenCategory);
             speech.pause("1s");
             speech.say("How do you say " + theRandomWord + "?");  
         } else {
@@ -99,35 +101,33 @@ DrSpeech.prototype.intentHandlers = {
     },
 
     "AnswerIntent": function (intent, session, response) {
-        // var speech = new Speech();
-        // var word = intent.slots.Word.value;
+        var speech = new Speech();
+        var word = intent.slots.Word.value;
 
-        // if (word === session.attributes.word) {
-        //     speech.say("You said it correctly.");
-        //     speech.pause("1s");
-        //     speech.say("It is");
-        //     speech.say(word);
-        // } else {
-        //     speech.say("That was not correct. I heard ");
-        //     speech.pause("1s");
-        //     speech.say(word);
-        //     speech.pause('1s');
-        //     speech.say("which is spelled as");
-        //     speech.pause("1s");
-        //     speech.spellSlowly(word, "500ms");
-        //     speech.pause("1s");
-        //     speech.say("The correct way to pronounce it is");
-        //     speech.pause("800ms");
-        //     var syllables = syl(session.attributes.word);
-        //     syllables.syllables.forEach(function (part, index) {
-        //         speech.pause("300ms");
-        //         speech.say(part);
-        //     });
-        // }
-
-        // response.tell(speech.toObject());
-
-        response.tell("Answer");
+        if (word === session.attributes.saveWord) {
+            speech.say("You said it correctly.");
+            speech.pause("1s");
+            speech.say("It is");
+            speech.say(word);
+        } else {
+            speech.say("That was not correct. I heard ");
+            speech.pause("1s");
+            speech.say(word);
+            speech.pause('1s');
+            speech.say("which is spelled as");
+            speech.pause("1s");
+            speech.spellSlowly(word, "500ms");
+            speech.pause("1s");
+            speech.say("The correct way to pronounce it is");
+            speech.pause("800ms");
+            // var syllables = syl(session.attributes.word);
+            // syllables.syllables.forEach(function (part, index) {
+            //     speech.pause("300ms");
+            //     speech.say(part);
+            // });
+        }
+        response.tell(speech.toObject());
+        // response.tell("Answer");
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
