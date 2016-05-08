@@ -1,1 +1,9 @@
-SayWordIntent Its {bear | Word}
+CategoryIntent I want to practice {Category}
+CategoryIntent I want to practice on {Category}
+
+AnswerIntent Is {Word} correct
+AnswerIntent I am saying the word {Word}
+AnswerIntent am i saying {Word} correct
+
+
+

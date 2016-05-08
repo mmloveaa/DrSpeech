@@ -3,14 +3,14 @@
 function Vocabulary() {
     this._catalog = {
         "default": ["cat", "experience", "gender", "appreciate", "balloon", "park"],
-        "noun": ["sheep", "problem", "beard", "murder","fork"],
+        "noun": ["sheep", "problem", "beard", "fork", "doctor", "peanut"],
         "verb": ["jump", "validate", "think", "draw", "start"],
         "adjective": ["free", "subtle", "brilliant", "adventurous"]
     }
 }
 
-Vocabulary.prototype.getRandomWord = function () {
-    var category = this._catalog["default"];
+Vocabulary.prototype.getRandomWord = function (categoryOfWord) {
+    var category = this._catalog[categoryOfWord];
     var length = category.length;
     return category[this.random(length)];
 };

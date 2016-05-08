@@ -54,15 +54,18 @@ DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequ
 };
 
 DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-    session.attributes.word = vocabulary.getRandomWord();
+    // session.attributes.word = vocabulary.getRandomWord();
     var speech = new Speech();
     speech.say("Welcome to Doctor Speech. Let's Begin Your Lesson.");
-    speech.say("When you give an answer, start with saying its.");
+    // speech.say("When you give an answer, start with saying its.");
     speech.pause("1s");
-    speech.say("How do you say ");
+    // speech.say("How do you say?");
+    speech.say("Are you ready?");
+    var reprompt = "Are you ready for the lesson?";
 
-    speech.say(session.attributes.word);
-    response.ask(speech.toObject(), "How do you say " + session.attributes.word);
+    // speech.say(session.attributes.word);
+    // response.ask(speech.toObject(), "How do you say " + session.attributes.word);
+    response.ask(speech.toObject(), reprompt);
 };
 
 DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
@@ -73,37 +76,67 @@ DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest,
 
 DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
-    "SayWordIntent": function (intent, session, response) {
-        var speech = new Speech();
-        var word = intent.slots.Word.value;
+    "CategoryIntent": function (intent, session, response) {
+        // response.tell("Category WOW WOW WOW");
 
-        if (word === session.attributes.word) {
-            speech.say("You said it correctly.");
+        var speech = new Speech();
+        var givenCategory = intent.slots.Category.value;
+
+        if (givenCategory === "verb" || givenCategory ==="noun" || givenCategory ==="adjective") {
+            speech.say("Great");
             speech.pause("1s");
-            speech.say("It is");
-            speech.say(word);
+            speech.say("You want to practice on" + givenCategory);
+            speech.pause("1s");
+            speech.say("How do you say " + intent.slots.Word.value + "?");  
         } else {
-            speech.say("That was not correct. I heard ");
-            speech.pause("1s");
-            speech.say(word);
-            speech.pause('1s');
-            speech.say("which is spelled as");
-            speech.pause("1s");
-            speech.spellSlowly(word, "500ms");
-            speech.pause("1s");
-            speech.say("The correct way to pronounce it is");
-            speech.pause("800ms");
-            var syllables = syl(session.attributes.word);
-            syllables.syllables.forEach(function (part, index) {
-                speech.pause("300ms");
-                speech.say(part);
-            });
+            speech.say("Please choose the category again. You can choose noun, verb or adjective");
         }
 
-        response.tell(speech.toObject());
+        var reprompt = "How do you say " + intent.slots.Word.value + "?";
+
+        response.ask(speech.toObject(), reprompt);
     },
+
+    "AnswerIntent": function (intent, session, response) {
+        // var speech = new Speech();
+        // var word = intent.slots.Word.value;
+
+        // if (word === session.attributes.word) {
+        //     speech.say("You said it correctly.");
+        //     speech.pause("1s");
+        //     speech.say("It is");
+        //     speech.say(word);
+        // } else {
+        //     speech.say("That was not correct. I heard ");
+        //     speech.pause("1s");
+        //     speech.say(word);
+        //     speech.pause('1s');
+        //     speech.say("which is spelled as");
+        //     speech.pause("1s");
+        //     speech.spellSlowly(word, "500ms");
+        //     speech.pause("1s");
+        //     speech.say("The correct way to pronounce it is");
+        //     speech.pause("800ms");
+        //     var syllables = syl(session.attributes.word);
+        //     syllables.syllables.forEach(function (part, index) {
+        //         speech.pause("300ms");
+        //         speech.say(part);
+        //     });
+        // }
+
+        // response.tell(speech.toObject());
+
+        response.tell("Answer");
+    },
+
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("Try again and listen carefully", "You can do this!");
+    },
+
+    "AMAZON.YesIntent": function (intent, session, response) {
+        // response.tell("Yes");
+        var reprompt = "Please tell me what category of words you want to practice on? You can choose noun, verb or adjective.";
+        response.ask("Please tell me what category of words you want to practice on? You can choose noun, verb or adjective.", reprompt);
     }
 };
 
