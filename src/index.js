@@ -72,19 +72,15 @@ DrSpeech.prototype.intentHandlers = {
         var word = intent.slots.Word.value;
         if (word == "fork") {
             speech.say("You said it correctly.");
-            speech.audio("https://ssl.gstatic.com/dictionary/static/sounds/de/0/" + word.toLowerCase() + ".mp3");
+            speech.say(word);
             speech.pause("1s");
             speech.say("It spells as ");
             speech.spell(word);
         } else {
             speech.say("That was not correct. I heard ");
-            speech.say(word)
+            speech.say(word);
             speech.say(" which is spelled");
             speech.spell(word);
-            speech.pause("1s");
-            speech.say("The correct way to pronounce it is");
-            speech.pause("800ms");
-            speech.audio("https://ssl.gstatic.com/dictionary/static/sounds/de/0/fork.mp3");
         }
 
         response.tell(speech.toObject());
