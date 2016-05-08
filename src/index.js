@@ -94,7 +94,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("800ms");
             var syllables = syl(WORD);
             syllables.syllables.forEach(function (part, index) {
-                speech.pause("300mss");
+                speech.pause("300ms");
                 speech.say(part);
             });
         }
