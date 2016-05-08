@@ -2,6 +2,16 @@
 
 /**
  * This class helps simplify using SSML (Speech Synthesis Markup Language).
+ *
+ * An example of how to use this class.
+ * <code>
+ *  var speech = new Speech();
+ *  speech.say("Let's begin your lesson");
+ *  speech.pause("1s");
+ *  speech.say("How do you say " + word);
+ *
+ *  response.tell(speech.toObject(), ...);
+ * </code>
  * TODO: Implement a method for <phoneme/>, <w/>,
  * TODO: interpret-as="cardinal|ordinal|digits|fraction|unit|date|time|telephone|address" + format="mdy|dmy|ymd|md|dm|ym|my|d|m|y"
  * @constructor
