@@ -2,7 +2,7 @@
 
 function Vocabulary() {
     this._catalog = {
-        "default": ["sheep", "Encyclopedia", "Experience", "gender", "appreciate", "murder", "Seen", "crisps", "assailant"]
+        "default": ["Sheep", "Query", "Experience", "Gender", "Appreciate", "Murder", "Seen", "Fork", "Start"]
     }
 }
 
