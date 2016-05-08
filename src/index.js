@@ -84,9 +84,13 @@ DrSpeech.prototype.intentHandlers = {
             speech.spell(word);
             speech.pause("1s");
             speech.say("The correct way to pronounce it is");
+            speech.pause("800ms");
             var syllables = syl('fork');
-            var pronunciation = syllables.syllables.join(" ");
-            speech.say(pronunciation);
+            
+            syllables.syllables.forEach(function (part, index) {
+                speech.pause("500ms");
+                speech.say(part);
+            });
         }
 
         response.tell(speech.toObject());
