@@ -1,12 +1,12 @@
 /**
-    Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-    Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+ Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
 
-        http://aws.amazon.com/apache2.0/
+ http://aws.amazon.com/apache2.0/
 
-    or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-*/
+ or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ */
 
 /**
  * This simple sample has no external dependencies or session management, and shows the most basic
@@ -28,6 +28,7 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  */
 var AlexaSkill = require('./AlexaSkill');
 var Speech = require('./lib/speech');
+var syl = require('gl-syllabler');
 
 /**
  * DrSpeech is a child of AlexaSkill.
@@ -70,12 +71,24 @@ DrSpeech.prototype.intentHandlers = {
     "SayWordIntent": function (intent, session, response) {
         var speech = new Speech();
         var word = intent.slots.Word.value;
-        speech.say("You just said,");
-        speech.say(word);
-        speech.pause("1s");
-        speech.say("It spells as ");
-        speech.spell(word);
-        
+        if (word == "fork") {
+            speech.say("You said it correctly.");
+            speech.say(word);
+            speech.pause("1s");
+            speech.say("It spells as ");
+            speech.spell(word);
+        } else {
+            speech.say("That was not correct. I heard ");
+            speech.say(word)
+            speech.say(" which is spelled");
+            speech.spell(word);
+            speech.pause("1s");
+            speech.say("The correct way to pronounce it is");
+            var syllables = syl('fork');
+            var pronunciation = syllables.syllables.join(" ");
+            speech.say(pronunciation);
+        }
+
         response.tell(speech.toObject());
     },
     "AMAZON.HelpIntent": function (intent, session, response) {
