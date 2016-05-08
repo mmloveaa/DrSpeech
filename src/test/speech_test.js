@@ -1,5 +1,6 @@
 var assert = require('chai').assert;
 var Speech = require('../lib/speech');
+var syl = require('../lib/syllables');
 
 describe('Speech', function () {
 

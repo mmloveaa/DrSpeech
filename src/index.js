@@ -28,7 +28,6 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  */
 var AlexaSkill = require('./AlexaSkill');
 var Speech = require('./lib/speech');
-var syl = require('./lib/syllables');
 
 /**
  * DrSpeech is a child of AlexaSkill.
@@ -85,12 +84,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("1s");
             speech.say("The correct way to pronounce it is");
             speech.pause("800ms");
-            var syllables = syl('fork');
-            
-            syllables.syllables.forEach(function (part, index) {
-                speech.pause("500ms");
-                speech.say(part);
-            });
+            speech.audio("http://www.howmanysyllables.com/pronounce/happy.mp3");
         }
 
         response.tell(speech.toObject());
