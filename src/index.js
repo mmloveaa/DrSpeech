@@ -54,9 +54,9 @@ DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, re
     speech.say("Welcome to Doctor Speech. Let's Begin Your Lesson.");
     speech.say("When you give an answer, start with saying its.");
     speech.pause("1s");
-    speech.say("How do you say fork?");
+    speech.say("How do you say banana?");
 
-    response.ask(speech.toObject(), "How do you say fork?");
+    response.ask(speech.toObject(), "How do you say banana?");
 };
 
 DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
@@ -70,16 +70,19 @@ DrSpeech.prototype.intentHandlers = {
     "SayWordIntent": function (intent, session, response) {
         var speech = new Speech();
         var word = intent.slots.Word.value;
-        if (word == "fork") {
+        if (word === "fork") {
             speech.say("You said it correctly.");
             speech.say(word);
             speech.pause("1s");
-            speech.say("It spells as ");
+            speech.say("which is spelled as");
+            speeech.pause("1s");
             speech.spell(word);
         } else {
             speech.say("That was not correct. I heard ");
             speech.say(word);
-            speech.say(" which is spelled");
+            speech.pause('1s');
+            speech.say("which is spelled as");
+            speeech.pause("1s");
             speech.spell(word);
         }
 
