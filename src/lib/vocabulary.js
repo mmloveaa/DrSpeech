@@ -2,10 +2,10 @@
 
 function Vocabulary() {
     this._catalog = {
-        "default": ["Cat", "Experience", "Gender", "Appreciate", "Balloon", "Park"],
-        "noun": ["Sheep", "Problem", "Beard", "Murder","Fork"],
-        "verb": ["Judge", "Validate", "Think", "Draw", "Start"],
-        "adjective": ["Free", "Subtle", "Brilliant", "Adventurous"]
+        "default": ["cat", "experience", "gender", "appreciate", "balloon", "park"],
+        "noun": ["sheep", "problem", "beard", "murder","fork"],
+        "verb": ["jump", "validate", "think", "draw", "start"],
+        "adjective": ["free", "subtle", "brilliant", "adventurous"]
     }
 }
 

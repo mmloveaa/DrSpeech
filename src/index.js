@@ -79,11 +79,9 @@ DrSpeech.prototype.intentHandlers = {
 
         if (word === session.attributes.word) {
             speech.say("You said it correctly.");
+            speech.pause("1s");
+            speech.say("It is");
             speech.say(word);
-            speech.pause("1s");
-            speech.say("which is spelled as");
-            speech.pause("1s");
-            speech.spellSlowly(word, "500ms");
         } else {
             speech.say("That was not correct. I heard ");
             speech.pause("1s");
