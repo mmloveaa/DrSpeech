@@ -90,7 +90,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("1s");
             speech.say("You want to practice on " + givenCategory);
             speech.pause("1s");
-            speech.say("How do you say " + theRandomWord + "?");  
+            speech.say("How do you say " + theRandomWord + "?");
         } else {
             speech.say("Please choose the category again. You can choose noun, verb or adjective");
         }
@@ -120,11 +120,11 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("1s");
             speech.say("The correct way to pronounce it is");
             speech.pause("800ms");
-            // var syllables = syl(session.attributes.word);
-            // syllables.syllables.forEach(function (part, index) {
-            //     speech.pause("300ms");
-            //     speech.say(part);
-            // });
+            var syllables = syl(session.attributes.saveWord);
+            syllables.syllables.forEach(function (part, index) {
+                speech.pause("50ms");
+                speech.say(part);
+            });
         }
         response.tell(speech.toObject());
         // response.tell("Answer");
