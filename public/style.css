@@ -11,3 +11,20 @@ body {
 	 color: #e8e3e3;
 
 }
+
+#description {
+  margin: 0px;
+  float: right;
+  width: 350px;
+  font-family: 'Noto Serif', serif;
+  font-size: 15px;
+}
+
+#howTo {
+  margin: 0px;
+  margin-top: 120px;
+  float: left;
+  width: 350px;
+  font-family: 'Noto Serif', serif;
+  font-size: 15px;
+}
