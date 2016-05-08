@@ -1,2 +1,1 @@
 SayWordIntent Its {fork | Word}
-SayWordIntent {fork | Word}
