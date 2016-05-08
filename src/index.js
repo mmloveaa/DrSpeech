@@ -21,15 +21,17 @@
 /**
  * App ID for the skill
  */
-var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
-var WORD = 'banana';
-
 /**
  * The AlexaSkill prototype and helper functions
  */
 var AlexaSkill = require('./AlexaSkill');
+
 var Speech = require('./lib/speech');
 var syl = require('./lib/syllables');
+var Vocabulary = require('./lib/vocabulary');
+
+var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
+var vocabulary = new Vocabulary();
 
 /**
  * DrSpeech is a child of AlexaSkill.
@@ -52,14 +54,15 @@ DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequ
 };
 
 DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+    session.attributes.word = vocabulary.getRandomWord();
     var speech = new Speech();
     speech.say("Welcome to Doctor Speech. Let's Begin Your Lesson.");
     speech.say("When you give an answer, start with saying its.");
     speech.pause("1s");
     speech.say("How do you say ");
-    speech.say(WORD);
 
-    response.ask(speech.toObject(), "How do you say " + WORD);
+    speech.say(session.attributes.word);
+    response.ask(speech.toObject(), "How do you say " + session.attributes.word);
 };
 
 DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
@@ -74,7 +77,7 @@ DrSpeech.prototype.intentHandlers = {
         var speech = new Speech();
         var word = intent.slots.Word.value;
 
-        if (word === WORD) {
+        if (word === session.attributes.word) {
             speech.say("You said it correctly.");
             speech.say(word);
             speech.pause("1s");
@@ -92,7 +95,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("1s");
             speech.say("The correct way to pronounce it is");
             speech.pause("800ms");
-            var syllables = syl(WORD);
+            var syllables = syl(session.attributes.word);
             syllables.syllables.forEach(function (part, index) {
                 speech.pause("300ms");
                 speech.say(part);
