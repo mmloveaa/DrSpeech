@@ -74,19 +74,19 @@ DrSpeech.prototype.intentHandlers = {
         var speech = new Speech();
         var word = intent.slots.Word.value;
 
-        if (word == WORD) {
+        if (word === WORD) {
             speech.say("You said it correctly.");
             speech.say(word);
             speech.pause("1s");
             speech.say("which is spelled as");
-            speeech.pause("1s");
+            speech.pause("1s");
             speech.spell(word);
         } else {
             speech.say("That was not correct. I heard ");
             speech.say(word);
             speech.pause('1s');
             speech.say("which is spelled as");
-            speeech.pause("1s");
+            speech.pause("1s");
             speech.spell(word);
             speech.pause("1s");
             speech.say("The correct way to pronounce it is");
