@@ -28,7 +28,7 @@ var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-valu
  */
 var AlexaSkill = require('./AlexaSkill');
 var Speech = require('./lib/speech');
-var syl = require('gl-syllabler');
+var syl = require('./lib/syllables');
 
 /**
  * DrSpeech is a child of AlexaSkill.

@@ -23,8 +23,5 @@
   "homepage": "https://github.com/mmloveaa/DrSpeech#readme",
   "devDependencies": {
     "chai": "^3.5.0"
-  },
-  "dependencies": {
-    "gl-syllabler": "^1.1.2"
   }
 }
