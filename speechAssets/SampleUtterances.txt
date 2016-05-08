@@ -1,1 +1,1 @@
-SayWordIntent Its {fork | Word}
+SayWordIntent Its {banana | Word}
