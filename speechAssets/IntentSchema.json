@@ -14,7 +14,7 @@
       "slots": [
         {
           "name":"Word",
-          "type": "AMAZON.LITERAL"
+          "type": "LIST_OF_WORDS"
         }
       ]
     },

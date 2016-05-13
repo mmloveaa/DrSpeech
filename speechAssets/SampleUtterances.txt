@@ -1,9 +1,9 @@
 CategoryIntent I want to practice {Category}
 CategoryIntent I want to practice on {Category}
 
-AnswerIntent Is {flower | Word} correct
-AnswerIntent I am saying the word {flower | Word}
-AnswerIntent am i saying {flower | Word} correct
+AnswerIntent say {Word}
+AnswerIntent I am saying the word {Word}
+AnswerIntent am i saying {Word} correct
 
 
 
