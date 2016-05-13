@@ -1,4 +1,26 @@
+/**
+ Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
+ Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+
+ http://aws.amazon.com/apache2.0/
+
+ or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ */
+
+/**
+ * This simple sample has no external dependencies or session management, and shows the most basic
+ * example of how to create a Lambda function for handling Alexa Skill requests.
+ *
+ * Examples:
+ * One-shot model:
+ *  User: "Alexa, tell Greeter to say hello"
+ *  Alexa: "Hello World!"
+ */
+
+/**
+ * App ID for the skill
+ */
 /**
  * The AlexaSkill prototype and helper functions
  */
@@ -25,17 +47,32 @@ var DrSpeech = function () {
 DrSpeech.prototype = Object.create(AlexaSkill.prototype);
 DrSpeech.prototype.constructor = DrSpeech;
 
+DrSpeech.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
+    console.log("DrSpeech onSessionStarted requestId: " + sessionStartedRequest.requestId
+        + ", sessionId: " + session.sessionId);
+    // any initialization logic goes here
+};
 
 DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
+    // session.attributes.word = vocabulary.getRandomWord();
     var speech = new Speech();
     speech.say("Welcome to Doctor Speech. Let's Begin Your Lesson.");
+    // speech.say("When you give an answer, start with saying its.");
     speech.pause("1s");
+    // speech.say("How do you say?");
     speech.say("Are you ready?");
     var reprompt = "Are you ready for the lesson?";
 
+    // speech.say(session.attributes.word);
+    // response.ask(speech.toObject(), "How do you say " + session.attributes.word);
     response.ask(speech.toObject(), reprompt);
 };
 
+DrSpeech.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
+    console.log("DrSpeech onSessionEnded requestId: " + sessionEndedRequest.requestId
+        + ", sessionId: " + session.sessionId);
+    // any cleanup logic goes here
+};
 
 DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
