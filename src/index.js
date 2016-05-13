@@ -89,7 +89,9 @@ DrSpeech.prototype.intentHandlers = {
                 speech.say(part);
             });
         }
-        response.tell(speech.toObject());
+
+        var reprompt = "Do you want another practice? If yes, what do you want to practice on?"
+        response.ask(speech.toObject(), reprompt);
         // response.tell("Answer");
     },
 
