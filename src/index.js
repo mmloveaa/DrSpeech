@@ -55,7 +55,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("1s");
             speech.say("How do you say " + theRandomWord + "?");
         } else {
-            speech.say("Please choose the category again. You can choose noun, verb or adjective");
+            speech.say("Please choose the category again. You can choose nouns, verbs or adjectives");
         }
 
         var reprompt = "How do you say " + theRandomWord + "?";
@@ -90,11 +90,11 @@ DrSpeech.prototype.intentHandlers = {
             });
         }
 
-        var reprompt = "Do you want another practice? If yes, what do you want to practice on?"
+        var reprompt = "Do you want to continue?"
         response.ask(speech.toObject(), reprompt);
         // response.tell("Answer");
     },
-
+    
     "AMAZON.HelpIntent": function (intent, session, response) {
         response.ask("Try again and listen carefully", "You can do this!");
     },
