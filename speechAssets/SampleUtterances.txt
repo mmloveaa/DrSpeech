@@ -6,6 +6,7 @@ CategoryIntent sure let's do {Category}
 CategoryIntent yes I would like to try {Category}
 CategoryIntent yes can we do {Category}
 CategoryIntent yes let's do {Category}
+CategoryIntent {Category}
 
 AnswerIntent say {Word}
 AnswerIntent I am saying the word {Word}

@@ -49,6 +49,7 @@ DrSpeech.prototype.intentHandlers = {
             return;
         }
         var categoryWord = categorySlot.value;
+        session.attributes.chosenCategory = categoryWord;
 
         if (categoryWord !== "verb" && categoryWord !== "noun" && categoryWord !== "adjective") {
             response.ask("Please choose a provided category. Do you want to practice on nouns, verbs or adjectives?");
@@ -63,7 +64,6 @@ DrSpeech.prototype.intentHandlers = {
             speech.say("Great");
             speech.pause("1s");
             speech.say("You want to practice on " + categoryWord);
-            session.attributes.chosenCategory = categoryWord;
             speech.pause("1s");
             speech.say("How do you say " + theRandomWord + "?");
         }
@@ -91,6 +91,7 @@ DrSpeech.prototype.intentHandlers = {
             speech.say("It is");
             speech.say(word);
         }
+
         else if (word !== session.attributes.saveWord) {
 
             speech.say("That was not correct. I heard ");
@@ -105,10 +106,12 @@ DrSpeech.prototype.intentHandlers = {
             speech.pause("800ms");
             var syllables = syl(session.attributes.saveWord);
             syllables.syllables.forEach(function (part, index) {
-                speech.pause("50ms");
+                speech.pause("20ms");
                 speech.say(part);
             });
-        } else {
+        }
+
+        else {
             speech.say("I reach the else case");
         }
 
@@ -117,13 +120,17 @@ DrSpeech.prototype.intentHandlers = {
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
-        response.ask("Try again and listen carefully", "You can do this!");
+        response.ask("Try again and listen carefully", "What cateogry do you want to practice? Noun, verb or adjective?");
     },
 
     "AMAZON.YesIntent": function (intent, session, response) {
         // response.tell("Yes");
         var reprompt = "Please tell me what category of words you want to practice on? You can choose nouns, verbs or adjectives.";
         response.ask("Please tell me what category of words you want to practice on? You can choose nouns, verbs or adjectives.", reprompt);
+    },
+
+    "AMAZON.NoIntent": function (intent, session, response) {
+        response.tell("I hope you enjoy Doctor Speech. Goodbye!");
     }
 };
 
