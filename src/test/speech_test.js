@@ -12,6 +12,11 @@ describe('Speech', function () {
             speech = new Speech();
         });
 
+        it('should generate a saying tag2', function () {
+            speech.say("star");
+            assert.equal(speech.ssml(), "<speak>star</speak>");
+        });
+
         it('should generate a saying tag', function () {
             speech.say("hi");
             assert.equal(speech.ssml(), "<speak>hi</speak>");

@@ -16,5 +16,6 @@ AnswerIntent It's sounds like {Word}
 AnswerIntent It is like {Word}
 AnswerIntent It is said {Word}
 AnswerIntent It is sounds like {Word}
+AnswerIntent {Word}
 
 
