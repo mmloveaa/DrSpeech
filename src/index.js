@@ -1,4 +1,3 @@
-
 /**
  * The AlexaSkill prototype and helper functions
  */
@@ -40,7 +39,6 @@ DrSpeech.prototype.eventHandlers.onLaunch = function (launchRequest, session, re
 DrSpeech.prototype.intentHandlers = {
     // register custom intent handlers
     "CategoryIntent": function (intent, session, response) {
-        // response.tell("Category WOW WOW WOW");
 
         var speech = new Speech();
 
@@ -56,17 +54,16 @@ DrSpeech.prototype.intentHandlers = {
             response.ask("Please choose a provided category. Do you want to practice on nouns, verbs or adjectives?");
             return;
         }
-        //
-        // // var givenCategory = intent.slots.Category.value;
-        //
+
         else if (categoryWord === "verb" || categoryWord === "noun" || categoryWord === "adjective") {
             var theRandomWord = vocabulary.getRandomWord(categoryWord);
             session.attributes.saveWord = theRandomWord;
-        // // need to save session attribute saveWord here because this is where theRandomWord was generated
+            // need to save session attribute saveWord here because this is where theRandomWord was generated
 
             speech.say("Great");
             speech.pause("1s");
             speech.say("You want to practice on " + categoryWord);
+            session.attributes.chosenCategory = categoryWord;
             speech.pause("1s");
             speech.say("How do you say " + theRandomWord + "?");
         }
@@ -82,39 +79,38 @@ DrSpeech.prototype.intentHandlers = {
         var word = intent.slots.Word.value;
 
         var slots = intent.slots;
-        var categorySlot = slots.Category;
+        var categorySlot = session.attributes.chosenCategory;
         if (categorySlot === undefined || categorySlot === null) {
             response.ask("Please choose a category first. Do you want to practice on nouns, verbs or adjectives?");
             return;
         }
 
-        // var givenCategory = intent.slots.Category.value;
+        else if (word === session.attributes.saveWord) {
+            speech.say("You said it correctly.");
+            speech.pause("1s");
+            speech.say("It is");
+            speech.say(word);
+        }
+        else if (word !== session.attributes.saveWord) {
 
-
-        // else if (word === session.attributes.saveWord) {
-        //     speech.say("You said it correctly.");
-        //     speech.pause("1s");
-        //     speech.say("It is");
-        //     speech.say(word);
-        // }
-        // else if (word !== session.attribute.saveWord) {
-        //     speech.say("That was not correct. I heard ");
-        //     speech.pause("1s");
-        //     speech.say(word);
-        //     speech.pause('1s');
-        //     speech.say("which is spelled as");
-        //     speech.pause("1s");
-        //     speech.spellSlowly(word, "500ms");
-        //     speech.pause("1s");
-        //     speech.say("The correct way to pronounce it is");
-        //     speech.pause("800ms");
-        //     var syllables = syl(session.attributes.saveWord);
-        //     syllables.syllables.forEach(function (part, index) {
-        //         speech.pause("50ms");
-        //         speech.say(part);
-        //     });
-        // }
-        // speech.say("You're a jerk!");
+            speech.say("That was not correct. I heard ");
+            speech.pause("1s");
+            speech.say(word);
+            speech.pause('1s');
+            speech.say("which is spelled as");
+            speech.pause("1s");
+            speech.spellSlowly(word, "500ms");
+            speech.pause("1s");
+            speech.say("The correct way to pronounce it is");
+            speech.pause("800ms");
+            var syllables = syl(session.attributes.saveWord);
+            syllables.syllables.forEach(function (part, index) {
+                speech.pause("50ms");
+                speech.say(part);
+            });
+        } else {
+            speech.say("I reach the else case");
+        }
 
         var reprompt = "Do you want to continue?";
         response.ask(speech.toObject(), reprompt);
