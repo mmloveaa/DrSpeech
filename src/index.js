@@ -112,7 +112,7 @@ DrSpeech.prototype.intentHandlers = {
         }
 
         else {
-            speech.say("I reach the else case");
+            speech.say("Please choose a category. Do you want to practice on nouns, verbs or adjectives?");
         }
 
         var reprompt = "Do you want to continue?";
